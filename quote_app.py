@@ -67,8 +67,8 @@ if not st.session_state["authenticated"]:
     st.stop() # Freeze execution here until they pass the security firewall
 
 # --- CORE APPLICATION RUNNER (ONLY ACCESSIBLE IF AUTHENTICATED) ---
-st.title("📲 Desk Quick-Quote Generator")
-st.write("Fast multi-asset calculator optimized for formatting WhatsApp client updates.")
+st.title("📲 KODA Quick-Pricing Generator")
+st.write("Koda strike calculator optimized for formatting WhatsApp client updates.")
 
 if not gemini_api_key:
     st.error("⚠️ Central AI Key missing inside your secrets. Please fix it to unlock AI lookup.")
@@ -78,8 +78,8 @@ if not gemini_api_key:
 st.markdown("### 1. Pricing Inputs")
 
 companies_input = st.text_area(
-    "Enter 'Company, Strike %' (One pair per line or pasted straight from Excel columns):", 
-    value="apple, 85\nmahsing, 93\nanz au, 95.40\ntoyota japan, 90\nwestpac, 92.5",
+    "Enter 'Company, Strike %' (e.g. Westpac AU, 88.46. One Pair per line):", 
+    value="",
     height=200
 )
 
