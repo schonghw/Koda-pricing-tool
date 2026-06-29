@@ -79,7 +79,7 @@ st.markdown("### 1. Pricing Inputs")
 
 companies_input = st.text_area(
     "Enter 'Company, Strike %' i.e. Westpac AU, 88.46 (One Pair Per Line):", 
-    value="",
+    value="Westpac AU, 88.46",
     height=200
 )
 
