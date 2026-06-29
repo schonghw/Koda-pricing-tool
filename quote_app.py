@@ -78,7 +78,7 @@ if not gemini_api_key:
 st.markdown("### 1. Pricing Inputs")
 
 companies_input = st.text_area(
-    "Enter 'Company, Strike %' (e.g. Westpac AU, 88.46. One Pair per line):", 
+    "Enter 'Company, Strike %' i.e. Westpac AU, 88.46 (One Pair Per Line):", 
     value="",
     height=200
 )
