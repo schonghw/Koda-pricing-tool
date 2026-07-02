@@ -163,21 +163,31 @@ if raw_lines:
                 st.error(f"❌ Could not resolve ticker for query string: **{query}**")
                 continue
                 
+# Extract Market Pricing and Run Formula Matrix
             try:
                 asset = yf.Ticker(resolved_ticker)
                 spot_price = asset.fast_info['last_price']
                 currency = asset.fast_info['currency'].upper()
-                company_name = asset.info.get('longName', resolved_ticker)
                 
+                # 🔥 CRITICAL SHIELD: Insulate the corporate name scraper
+                try:
+                    company_name = asset.info.get('longName', resolved_ticker)
+                except Exception:
+                    company_name = resolved_ticker  # Fallback safely if Yahoo blocks the request
+                
+                # Execute specific row-level calculations
                 strike_dollars = spot_price * (row_strike_pct / 100.0)
+                
                 st.success(f"✅ **{resolved_ticker}** | Spot: **{spot_price:,.2f} {currency}** | Strike ({row_strike_pct:.2f}%): **{strike_dollars:,.2f} {currency}**")
                 
+                # Construct the clean text block for WhatsApp
                 whatsapp_compiled_output += f"{company_name} ({resolved_ticker})\n"
-                whatsapp_compiled_output += f"- Spot: ${spot_price:,.2f} {currency}\n"
-                whatsapp_compiled_output += f"- Strike: ${strike_dollars:,.2f} {currency} ({row_strike_pct:.2f}%) \n\n"
+                whatsapp_compiled_output += f"- Current Spot: ${spot_price:,.2f} {currency}\n"
+                whatsapp_compiled_output += f"- Strike {row_strike_pct:.2f}% (Strike ${strike_dollars:,.2f} {currency})\n\n"
                 
             except Exception:
                 st.error(f"❌ Financial market database lookup failed for resolved symbol: **{resolved_ticker}**")
+        
 
     # --- DISPLAY CONSOLIDATED CLIPBOARD COPIER ---
     if whatsapp_compiled_output:
