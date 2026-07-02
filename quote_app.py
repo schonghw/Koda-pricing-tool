@@ -182,8 +182,8 @@ if raw_lines:
                 
                 # Construct the clean text block for WhatsApp
                 whatsapp_compiled_output += f"{company_name} ({resolved_ticker})\n"
-                whatsapp_compiled_output += f"- Current Spot: ${spot_price:,.2f} {currency}\n"
-                whatsapp_compiled_output += f"- Strike {row_strike_pct:.2f}% (Strike ${strike_dollars:,.2f} {currency})\n\n"
+                whatsapp_compiled_output += f"- Spot: ${spot_price:,.2f} {currency}\n"
+                whatsapp_compiled_output += f"-  Strike: ${strike_dollars:,.2f} {currency} ({row_strike_pct:.2f}%)\n\n"
                 
             except Exception:
                 st.error(f"❌ Financial market database lookup failed for resolved symbol: **{resolved_ticker}**")
